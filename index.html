@@ -1,215 +1,105 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
-    <title>Train Schedule</title>
-  </head>
-  <body>
-        <div class="container">
-                <div class="jumbotron">
-                        <h1 class="display-4">Train Schedule</h1>
-                        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                      </div>
-              </div>
-    
-              <div class="container">
-                    <div class="card">
-                            <div class="card-header">
-                             Current Train Schedule
-                            </div>
-                            <div class="card-body">
-                                    <table class="table" id="train-table">
-                                            <thead>
-                                              <tr>
-                                                <th>Train Name</th>
-                                                <th>Destination</th>
-                                                <th>Frequency</th>
-                                                <th>Next Arrival</th>
-                                                <th>Minutes Away</th>
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr>
-                                                <td>John</td>
-                                                <td>SFO</td>
-                                                <td>25</td>
-                                                <td>5:35 PM</td>
-                                                <td>10</td>
-                                              </tr>
-                                              <tr>
-                                                    <td>Sandy</td>
-                                                    <td>Antioch</td>
-                                                    <td>25</td>
-                                                    <td>5:35 PM</td>
-                                                    <td>10</td>
-                                              </tr>
-                                              <tr>
-                                                    <td>John</td>
-                                                    <td>SFO</td>
-                                                    <td>25</td>
-                                                    <td>5:35 PM</td>
-                                                    <td>10</td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-                            </div>
-                          </div>
-                    
-                  </div>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-                  <div class="container">
-                        <div class="card">
-                                <h5 class="card-header">Add Train</h5>
-                                <div class="card-body">
-                                  
-                                  <form>
-                                        <div class="form-group">
-                                          <label for="exampleInputTrainName">Train Name</label>
-                                          <input type="TrainName" class="form-control" id="trainName" aria-describedby="TrainNameHelp" placeholder="Enter Train Name">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="exampleInputDestination">Destination</label>
-                                                <input type="Destination" class="form-control" id="destination" aria-describedby="DestinationHelp" placeholder="Enter Train Destination">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="exampleInputFirstTrainTime">First Train Time(HH:mm - Military Time)</label>
-                                                <input type="FirstTrainTime" class="form-control" id="firstTrainTime" aria-describedby="FirstTrainTimeHelp" placeholder="First Train Time">
-                                        </div>
-                                        <div class="form-group">
-                                                <label for="exampleInputFrequency">Frequency(min)</label>
-                                                <input type="Frequency" class="form-control" id="frequency" aria-describedby="FrequencyHelp" placeholder="Frequency">
-                                        </div>
-                                        
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                      </form>
-        
-                                </div>
-                              </div>
+<!--Custom css -->
+<link rel="stylesheet" href="assets/css/custom.css">
+<script src="assets/js/train.js"></script>
 
-                                              </div>
-    
-  </body>
-<script>
-let updateTime = function () {
-        let currentTime = moment().format('hh:mm')
-        // $("#time").text(currentTime)
-    }
+  <!-- Bootstrap CSS  & JQuery-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
 
+    <!--Firebase -->
+  <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
+  <title>Train Schedule</title>
+</head>
 
-    var firebaseConfig = {
-        apiKey: "AIzaSyAHZIQT99TNlbPG49Dqk4cLQkWPUUc0k9Y",
-    authDomain: "fir-new-e5b92.firebaseapp.com",
-    databaseURL: "https://fir-new-e5b92.firebaseio.com",
-    projectId: "fir-new-e5b92",
-    storageBucket: "fir-new-e5b92.appspot.com",
-    messagingSenderId: "675493617177",
-    appId: "1:675493617177:web:765bfa625db5029b4c5488",
-    measurementId: "G-NSGQ69H4MN"
-    };
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Train Time Table</h1>
+      <p class="lead">Train Schedules : Add a new train you want to track time for or check the arrival time and time to arrival from anywhere!!</p>
+    </div>
+  </div>
 
-var database = firebase.database();
+  <div class="container">
+    <div class="card" style='border-color: darkgoldenrod'>
+      <div class="card-header" style='background-color: darkgoldenrod;font-weight: bold'>
+        Current Train Schedule
+      </div>
+      <div class="card-body">
+        <table class="table" id="train-table">
+          <thead>
+            <tr>
+              <th>Train Name</th>
+              <th>Destination</th>
+              <th>Frequency</th>
+              <th>Next Arrival</th>
+              <th>Minutes Away</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
 
+  </div>
+<br>
+  <div class="container">
+    <div class="card" style='border-color: darkgoldenrod;'>
+      <h5 class="card-header" style='background-color: darkgoldenrod;'>Add Train</h5>
+      <div class="card-body">
 
-$(".btn").on("click",function(event){
-    event.preventDefault();
-var trainName;
-var destination;
-var firstTrainTime;
-var frequency;
-var nextArrival;
-var minsAway;
+        <form>
+          <div class="form-group">
+            <label for="exampleInputTrainName">Train Name</label>
+            <input type="TrainName" class="form-control" id="trainName" aria-describedby="TrainNameHelp"
+              placeholder="Enter Train Name">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputDestination">Destination</label>
+            <input type="Destination" class="form-control" id="destination" aria-describedby="DestinationHelp"
+              placeholder="Enter Train Destination">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputFirstTrainTime">First Train Time(HH:mm - Military Time)</label>
+            <input type="FirstTrainTime" class="form-control" id="firstTrainTime" aria-describedby="FirstTrainTimeHelp"
+              placeholder="First Train Time">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputFrequency">Frequency(min)</label>
+            <input type="Frequency" class="form-control" id="frequency" aria-describedby="FrequencyHelp"
+              placeholder="Frequency">
+          </div>
 
-trainName = $("#trainName").val().trim();
-console.log(trainName)
-destination = $("#destination").val().trim();
-console.log(destination)
-firstTrainTime = $("#firstTrainTime").val().trim();
-console.log(firstTrainTime)
-frequency = $("#frequency").val().trim();
-console.log(frequency)
+          <button type="submit" class="btn btn-warning">Submit</button>
+        </form>
 
+      </div>
+    </div>
 
-
-
-//
-//Temp storage of data
-var newTrain = {
-    name: trainName,
-    destination: destination,
-    firstTrainTime: firstTrainTime,
-    frequency: frequency
-  };
-  database.ref().push(newTrain);
-
-  //Clear all columns
-  $("#trainName").val("");
-  $("#destination").val("");
-  $("#firstTrainTime").val("");
-  $("#frequency").val("");
-});
-  // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
-database.ref().on("child_added", function(childSnapshot) {
-  console.log(childSnapshot.val());
-
-  // Store everything into a variable.
-  var trainName = childSnapshot.val().name;
-  var destination = childSnapshot.val().destination;
-  var firstTrainTime = childSnapshot.val().firstTrainTime;
-  var frequency = childSnapshot.val().frequency;
-
-  // Employee Info
-  console.log(trainName);
-  console.log(destination);
-  console.log(firstTrainTime);
-  console.log(frequency);
-
-  var firstTimeConverted = moment(firstTrainTime,"HH:mm").subtract(1,"years");
-console.log(firstTimeConverted," First Time Converted Time");
-var currentTime = moment().format('HH:mm');
-console.log("Current Time: ",currentTime);
-var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
-console.log(diffTime," Difference in Time");
-
-var tRemaining = diffTime % frequency;
-console.log(tRemaining," Time remaining");
-
-var tMinutesToNextTrain = frequency - tRemaining;
-console.log(tMinutesToNextTrain," Minutes to Next Train");
-
-var nextTrain = moment().add(tMinutesToNextTrain, "minutes");
-var nextArrival = moment(nextTrain).format("HH:mm");
-console.log("Next Train at : ",nextArrival);
-
-  // Create the new row
-  var newRow = $("<tr>").append(
-    $("<td>").text(trainName),
-    $("<td>").text(destination),
-    $("<td>").text(frequency),
-    $("<td>").text(nextArrival),
-    $("<td>").text(tMinutesToNextTrain)
-    
-  );
-
-  // Append the new row to the table
-  $("#train-table > tbody").append(newRow);
-
-});
-
-
-</script>
-
+  </div>
+  <script>
+    train();
+  </script>
+</body>
 </html>
