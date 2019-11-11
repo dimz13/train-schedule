@@ -35,5 +35,25 @@
  - momentjs
 
 
+## New Learning in this project:
+- Used Firebase - Code snippet:
+```jQuery
+ database.ref().on("child_added", function (childSnapshot) {
+        console.log(childSnapshot.val());
+
+        // Store everything into a variable.
+        var trainName = childSnapshot.val().name;
+        var destination = childSnapshot.val().destination;
+        var firstTrainTime = childSnapshot.val().firstTrainTime;
+        var frequency = childSnapshot.val().frequency;
+        });
+```
+- Used momentjs for the timimg part of the train schedule
+```Javascript
+function updateTime() {
+            var currentTime = moment().format('HH:mm');
+            console.log("Current Time: ", currentTime);
+        };
+ ```       
 
 
