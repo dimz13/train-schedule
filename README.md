@@ -1,7 +1,7 @@
 # train-schedule
 ![Train](train.png)
 # train-schedule
-[train-schedule] (https://dimz13.github.io/train-schedule/)
+[Train Schedule](https://dimz13.github.io/train-schedule/)
 
 ## How it works
   - This page will display train time table.
